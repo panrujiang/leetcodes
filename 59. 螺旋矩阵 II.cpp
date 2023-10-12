@@ -70,3 +70,38 @@ public:
 
     }
 };
+/*
+比较屌的解法 ，想法是压缩上下左右的横线 
+*/
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> ans(n,vector<int>(n,0));
+        int left = 0,right = n-1,top = 0,bottom = n-1;
+        int x = 1; // 待加入的数字
+        while(x <= n*n) {
+            // 上
+            for(int i = left; i <= right;i++){
+                ans[top][i] = x++;
+            }
+            top++;
+            // 右
+            for(int i = top; i <= bottom; i++) {
+                ans[i][right] = x++;
+            }
+            right--;
+            // 下
+            for(int i = right;i >= left;i--){
+                ans[bottom][i] = x++;
+            }
+            bottom--;
+            // 左
+            for(int i = bottom; i >= top; i--) {
+                ans[i][left] = x++;
+            }
+            left++;
+        }
+
+        return ans;
+    }
+};
