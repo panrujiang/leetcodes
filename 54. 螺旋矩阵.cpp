@@ -78,4 +78,46 @@ public:
         return order;
     }
 };
+/*
+ 一种超屌的解法，详细见：
+ https://leetcode.cn/problems/spiral-matrix/solutions/7155/cxiang-xi-ti-jie-by-youlookdeliciousc-3/ 
+*/
 
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int> ans;
+        int left = 0;
+        int right = matrix[0].size() - 1;
+        int top = 0;
+        int bottom = matrix.size() - 1;
+
+        while(true){
+            for(int i = left; i <= right; i ++){
+                ans.push_back(matrix[top][i]);
+            }
+            if(++ top > bottom){
+                break;
+            }
+            for(int i = top; i <= bottom; i ++){
+                ans.push_back(matrix[i][right]);
+            }
+            if(--right < left){
+                break;
+            }
+            for(int i = right; i >= left; i --){
+                ans.push_back(matrix[bottom][i]);
+            }
+            if(-- bottom < top){
+                break;
+            }
+            for(int i = bottom; i >= top; i --){
+                ans.push_back(matrix[i][left]);
+            }
+            if(++left > right){
+                break;
+            }
+        }
+            return ans;
+    }
+};
