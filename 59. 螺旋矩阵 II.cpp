@@ -35,3 +35,38 @@ public:
     return res;
     }  
 };
+/*
+根据力扣的官方解答，写出的代码 
+*/
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+    vector<vector<int>> matrix(n,vector<int>(n,0));
+    int left = 0, right = n - 1, top = 0, bottom = n - 1;
+    int count = 1;
+    while(left <= right && top <= bottom){
+        for(int i = left; i <= right; i ++){
+            matrix[top][i]=count;
+            count ++;
+        }
+        for(int i = top + 1; i <= bottom; i ++){
+            matrix[i][right]=count;
+            count ++;
+        }
+        for(int i = right - 1; i >= left; i -- ){
+                    matrix[bottom][i]=count;
+                    count ++;
+        }
+        for(int i = bottom - 1; i >= top + 1; i -- ){
+                   matrix[i][left]=count;
+                    count ++;
+        }
+        left ++;
+        right --;
+        top ++;
+        bottom --;
+    }
+    return matrix;
+
+    }
+};
