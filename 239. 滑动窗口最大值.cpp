@@ -5,7 +5,6 @@ https://leetcode.cn/problems/sliding-window-maximum/description/
  https://programmercarl.com/0239.%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC.html#%E6%80%9D%E8%B7%AF
 */
 
-
 class Solution {
 private:
     class MyQueue{
