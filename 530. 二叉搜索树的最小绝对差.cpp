@@ -31,3 +31,27 @@ public:
         return min;
     }
 };
+
+/*
+不用数组 
+*/
+class Solution {
+private:
+    int result = INT_MAX;
+    TreeNode* pre = NULL;
+    void traversal(TreeNode* cur){
+        if(cur == NULL) return;
+        traversal(cur -> left);
+        if(pre != NULL){
+            result = min(result,cur -> val - pre -> val);
+        }
+        pre = cur;
+        traversal(cur -> right);
+    }
+
+public:
+    int getMinimumDifference(TreeNode* root) {
+            traversal(root);
+            return result;
+    }
+};
