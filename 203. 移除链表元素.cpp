@@ -4,6 +4,7 @@ https://leetcode.cn/problems/remove-linked-list-elements/description/
 解答：
 https://programmercarl.com/0203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0.html#%E6%80%9D%E8%B7%AF 
 https://leetcode.cn/problems/remove-linked-list-elements/solutions/813358/yi-chu-lian-biao-yuan-su-by-leetcode-sol-654m/
+https://blog.csdn.net/weixin_64904163/article/details/126804101
 */
 
 /*
@@ -99,6 +100,48 @@ public:
         head -> next = removeElements(head -> next, val);
         return head -> val == val ? head -> next : head;
 
+    }
+};
+/*
+另外一种方法 
+*/
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        ListNode* cur = head;
+        ListNode* later = NULL;
+        ListNode* newhead = NULL;
+        ListNode* tail = NULL;
+        while(cur){
+            later = cur -> next;
+            if(cur -> val != val){
+                if(newhead == NULL){
+                    newhead = tail = cur;
+                    cur = later;
+                }else{
+                    tail -> next = cur;
+                    tail = cur;
+                    cur = later;
+                }
+            }else{
+                delete(cur);
+                cur = later;
+            }
+        }
+        if(tail){
+            tail -> next = NULL;
+        }
+        return newhead;
     }
 };
 

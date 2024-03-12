@@ -3,6 +3,7 @@
 https://leetcode.cn/problems/reverse-linked-list/description/
 解答：
 https://www.programmercarl.com/0206.%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.html#%E6%80%9D%E8%B7%AF 
+https://blog.csdn.net/weixin_64904163/article/details/126804101
 */
 
 /*
@@ -118,6 +119,34 @@ public:
     }
     ListNode* reverseList(ListNode* head) {
             return reverse(NULL,head);
+    }
+};
+
+/*
+一种通用的方法 
+*/
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* cur = head, *later = NULL;
+        ListNode* newHead = NULL;
+        while(cur){
+            later = cur -> next;
+            cur -> next = newHead;
+            newHead = cur;
+            cur = later;
+        }
+        return newHead;
     }
 };
 
