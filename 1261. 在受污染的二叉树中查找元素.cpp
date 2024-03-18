@@ -1,0 +1,48 @@
+/*
+题目来源：
+https://leetcode.cn/problems/find-elements-in-a-contaminated-binary-tree/
+解答：
+https://blog.csdn.net/Tisfy/article/details/136642314
+*/
+
+/*
+递推的方法加上哈希表 
+*/
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class FindElements {
+private:
+    unordered_set<int> se;
+    void dfs(TreeNode* root, int val){
+        if(!root){
+            return;
+        }
+        root -> val = val;
+        se.insert(val);
+        dfs(root -> left, 2 * val + 1);
+        dfs(root -> right, 2 * val + 2);
+    }
+public:
+    FindElements(TreeNode* root) {
+        dfs(root, 0);
+    }
+    
+    bool find(int target) {
+        return se.count(target);
+    }
+};
+
+/**
+ * Your FindElements object will be instantiated and called as such:
+ * FindElements* obj = new FindElements(root);
+ * bool param_1 = obj->find(target);
+ */

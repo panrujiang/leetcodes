@@ -74,3 +74,28 @@ public:
     }
 };
 
+/*
+回溯的算法。来源于Hello算法，可惜当n太大的时候就不管用了 
+*/
+class Solution {
+private:
+    int ans = 0;
+    void trackback(int count, int n){
+        if(count == n){
+            ans ++;
+            return;
+        }
+        for(int i = 1; i <= 2; i ++){
+            if(count + i > n){
+                break;
+            }
+            trackback(count + i, n);
+        }
+    }
+public:
+    int climbStairs(int n) {
+        trackback(0, n);
+        return ans;
+    }
+};
+
