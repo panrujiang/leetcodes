@@ -25,3 +25,28 @@ public:
         return max;
     }
 };
+
+/*
+HelloËã·¨ 
+*/
+class Solution {
+public:
+    int integerBreak(int n) {
+        if(n == 2 || n == 3){
+            return n - 1;
+        }
+        int a = n / 3;
+        int ans = 1;
+        switch(n % 3){
+            case 0:
+                ans = pow(3, a);
+                break;
+            case 1:
+                ans = pow(3, a - 1) * 4;
+                break;
+            case 2:
+                ans = pow(3, a) * 2;
+        }
+        return ans;
+    }
+};
