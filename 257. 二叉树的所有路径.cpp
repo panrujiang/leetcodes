@@ -3,6 +3,7 @@
 https://leetcode.cn/problems/binary-tree-paths/description/
 解答：
 https://programmercarl.com/0257.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84.html#%E6%80%9D%E8%B7%AF 
+https://leetcode.cn/problems/binary-tree-paths/solutions/400434/257-er-cha-shu-de-suo-you-lu-jing-tu-wen-jie-xi-by/
 */
 
 /**
@@ -48,3 +49,67 @@ public:
         return result;
     }
 };
+
+
+/*
+一眼回溯算法 
+*/
+class Solution {
+private:
+    vector<string> ans;
+    void dfs(TreeNode* node, string path){
+        if(!node){
+            return;
+        }
+        if(!node -> left && !node -> right){
+            path += to_string(node -> val);
+             ans.push_back(path);
+        }
+        dfs(node -> left, path + to_string(node -> val) + "->");
+        dfs(node -> right, path + to_string(node -> val) + "->");
+    }
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+        dfs(root, "");
+        return ans;
+    }
+};
+/*
+Java递归的方法 
+*/
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> res = new LinkedList<>();
+        if(root == null){
+            return res;
+        }
+        if(root.left == null && root.right == null){
+            res.add(root.val + "");
+            return res;
+        }
+        for(String path : binaryTreePaths(root.left)){
+            res.add(root.val + "->" + path);
+        }
+        for(String path : binaryTreePaths(root.right)){
+            res.add(root.val + "->" + path);
+        }
+        return res;
+    }
+}
+
+

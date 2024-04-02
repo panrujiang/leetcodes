@@ -3,6 +3,7 @@
 https://leetcode.cn/problems/find-the-duplicate-number/description/
 ½â´ð£º
 https://www.bilibili.com/video/BV1HG411C7ZM/?spm_id_from=333.788.recommend_more_video.4&vd_source=bb4b48d8c0acdd7bc58973f8e38ef55a
+https://leetcode.cn/problems/find-the-duplicate-number/solutions/18952/kuai-man-zhi-zhen-de-jie-shi-cong-damien_undoxie-d/
 
 */
 
@@ -42,5 +43,21 @@ public:
         }
 
         return slow;
+    }
+};
+/*
+¹þÏ£±í 
+*/
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        unordered_map<int, int> Hash;
+        for(auto num : nums){
+            Hash[num] ++;
+            if(Hash[num] > 1){
+                return num;
+            }
+        }
+        return -1;
     }
 };
