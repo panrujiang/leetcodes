@@ -82,4 +82,19 @@ void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n){
         --old2;
     }
 }
+/*
+Ë«Ö¸Õë¼ò»¯°æ 
+*/
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int up1 = m - 1, up2 = nums1.size() - 1, below = n -1;
+        while(up1 >= 0 && below >= 0){
+           nums1[up2 --] = (nums1[up1] > nums2[below] ? nums1[up1 --] : nums2[below --]);
+        }
+        while(below >= 0){
+            nums1[up2 --] = nums2[below --];
+        }
+    }
+};
 
